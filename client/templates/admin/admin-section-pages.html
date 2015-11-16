@@ -1,0 +1,15 @@
+<template name="adminSectionPages">
+  <h1 class="section-title">{{title}}<span> section</span></h1>
+  <div class="tiles-list">  
+    {{#each pages}}
+      {{> adminPageTile}}
+    {{/each}}
+  </div>
+  <div class="form-wrapper">
+    <form id="section-page-form">
+      <h2 class="title">Submit a new page</h2>
+      <input type="text" placeholder="Title" name="title" class="input-form title-form">
+      <input type="submit" value="Submit" class="submit-form"/>
+    </form>
+  </div>
+</template>

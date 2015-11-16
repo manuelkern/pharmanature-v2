@@ -1,0 +1,16 @@
+<template name="adminPageTile">
+    <div class="admin-tile {{#if active}}tile-active{{/if}}">
+      <a class="tile-title" href="">{{title}}</a>
+      <div class="switch">
+        <input type="checkbox" checked="{{#if active}}checked{{/if}}" class="toggle-active" id="{{title}}">
+        <label for="{{title}}"><span></span></label>
+        <div>{{#if active}}Active{{else}}Page is not active{{/if}}</div>
+      </div>
+      <div class="tile-controls">
+        <ul>
+          <li><a class="edit-control" href="{{pathFor 'adminEditSection'}}"><i class="fa fa-pencil"></i></a></li>
+          <li><a class="delete-control"><i class="fa fa-trash"></i></a></li>
+        </ul>
+      </div>
+    </div>
+</template>

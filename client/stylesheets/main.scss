@@ -1,0 +1,83 @@
+//
+// Variables
+//
+$mobileBreakpoint: 480px;
+$tabletBreakpoint: 768px;
+$computerBreakpoint: 992px;
+$largeMonitorBreakpoint: 1200px;
+$widescreenBreakpoint: 1920px;
+$verticalBreakpoint: 920px;
+
+//
+// Colors
+//
+$white: #FFFFFF;
+$black: #000000;
+$gray: #666666;
+$darker: rgba(0,0,0,.1);
+$lighter: rgba(255,255,255,.1);
+// Admin
+$adminBg: #E8E9E9;
+$admin: #64AAB5;
+$adminLight: #77CCD7;
+$adminDark: #538E95;
+
+//
+// Mixins
+//
+@mixin font-size($sizeValue: 1.6) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+//
+// Fonts
+//
+@font-face {
+    font-family: 'MetricBold';
+    src: url('/fonts/MetricBold.eot');
+    src: url('/fonts/MetricBold.eot') format('embedded-opentype'),
+         url('/fonts/MetricBold.woff2') format('woff2'),
+         url('/fonts/MetricBold.woff') format('woff'),
+         url('/fonts/MetricBold.ttf') format('truetype'),
+         url('/fonts/MetricBold.svg#MetricBold') format('svg');
+}
+
+@font-face {
+    font-family: 'MetricRegular';
+    src: url('/fonts/MetricRegular.eot');
+    src: url('/fonts/MetricRegular.eot') format('embedded-opentype'),
+         url('/fonts/MetricRegular.woff2') format('woff2'),
+         url('/fonts/MetricRegular.woff') format('woff'),
+         url('/fonts/MetricRegular.ttf') format('truetype'),
+         url('/fonts/MetricRegular.svg#MetricRegular') format('svg');
+}
+
+
+html {
+  font-size: 62.5%;
+  user-select: none;
+}
+
+html, body {
+  @include font-size(1);
+  margin: 0;
+  padding: 0;
+  background-color: $white;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'MetricRegular';
+}
+
+a {
+  text-decoration: none;
+
+}
+
+
+//
+// Pages
+//
+
+@import "admin.scss";
+@import "flash.scss";

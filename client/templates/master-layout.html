@@ -1,0 +1,8 @@
+<template name="masterLayout">
+  <div id="master-page">
+    {{#if Template.subscriptionsReady}}
+      {{> nav}}
+    {{/if}}
+    {{> yield}}
+  </div>
+</template>

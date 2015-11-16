@@ -1,0 +1,338 @@
+.admin-page {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+  background-color: $adminBg;
+  //
+  // Nav
+  //
+  .admin-nav-wrapper {
+    position: fixed;
+    height: calc(100% - 30px);
+    width: calc(20% - 30px);
+    padding: 15px;
+    z-index: 999;
+    .nav-inner{
+      height: 100%;
+      width: 100%;
+      /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#53e295+0,7db9e8+100 */
+      background: #53e295; /* Old browsers */
+      background: -moz-linear-gradient(45deg, #53e295 0%, #7db9e8 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#53e295), color-stop(100%,#7db9e8)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(45deg, #53e295 0%,#7db9e8 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(45deg, #53e295 0%,#7db9e8 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(45deg, #53e295 0%,#7db9e8 100%); /* IE10+ */
+      background: linear-gradient(45deg, #53e295 0%,#7db9e8 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#53e295', endColorstr='#7db9e8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+      .admin-home {
+        display: block;
+        font-weight: 300;
+        padding: 40px 0 15px 25px;
+        color: $admin;
+        background-color: $white;
+        @include font-size(1.3);
+      }
+      .admin-nav {
+        ul {
+          margin: 0;
+          padding: 0;
+          li {
+            list-style: none;
+            border-bottom: 1px solid $darker;
+            a {
+              display: block;
+              padding: 20px 0 20px 25px;
+              color: $white;
+              background-color: transparent;
+              transition: background-color .3s;
+              &:hover {
+                background-color: $lighter;
+              }
+            }
+          }
+        }
+        .admin-logout {
+          font-weight: 700;
+          cursor: pointer;
+          padding: 20px 0 20px 25px;
+          color: $white;
+          border-bottom: 1px solid $darker;
+          background-color: $admin;
+          transition: background-color .2s;
+          &:hover {
+            background-color: $adminDark;
+          }
+        }
+      }
+    }
+  }
+  //
+  // Content
+  //
+  .admin-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    .wrapper {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      //
+      // Tiles wrapper
+      //
+      .tiles-list {
+        margin-top: 68px;
+        width: 60%;
+        margin-left: 20%;
+        .tiles-wrapper {
+          //
+          // Tile
+          //
+          .admin-tile {
+            position: relative;
+            box-sizing: border-box;
+            padding: 20px;
+            margin-bottom: 15px;
+            background-color: rgba(0,0,0,.1);
+            color: $white;
+            cursor: move;
+            transition: box-shadow .3s, background-color .4s;
+            .tile-title {
+              @include font-size(1.6);
+              font-weight: 300;
+              display: inline-block;
+              margin-bottom: 15px;
+              color: $white;
+              transition: color .2s;
+              max-width: 80%;
+              &:hover {
+                color: $black;
+              }
+            }
+            .tile-order-badge {
+              position: absolute;
+              background-color: $white;
+              color: $admin;
+              width: 25px;
+              height: 25px;
+              border-radius: 100%;
+              text-align: center;
+              @include font-size(0.8);
+              line-height: 2;
+              top: -10px;
+              left: -10px;
+            }
+            ul {
+              margin: 0 0 15px 0;
+              padding: 0;
+              li {
+                color: rgba(0,0,0,.3);
+                list-style: none;
+              }
+            }
+            .tile-controls {
+              position: relative;
+              .switch {
+                position: absolute;
+                background-color: rgba(0,0,0,.2);
+                width: 40px;
+                height: 20px;
+                border-radius: 10px;
+                input[type="checkbox"] {
+                  display:none;
+                }
+                label {
+                  position: absolute;
+                  height: 20px;
+                }
+                input[type="checkbox"] + label span {
+                  display:inline-block;
+                  width:20px;
+                  height:20px;
+                  background-color: $white;
+                  border-radius: 100%;
+                  cursor: pointer;
+                  transition: all .3s;
+                }
+                input[type="checkbox"]:checked + label span {
+                  margin-left: 20px;
+                  background-color: $white;
+                }
+                div {
+                  position: absolute;
+                  left: 50px;
+                  width: 150px;
+                  opacity: .7;
+                }
+              }
+              ul {
+                text-align: right;
+                margin: 0;
+                li {
+                  color: $white;
+                  display: inline-block;
+                  cursor: pointer;
+                  position: relative;
+                  transition: color .2s;
+                  .delete-control {
+                    &:after {
+                      visibility: hidden;
+                      opacity: 0;
+                      content: 'delete';
+                      position: absolute;
+                      top: -36px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                      background-color: $black;
+                      padding: 6px;
+                      border-radius: 4px;
+                      transition: opacity .4s;
+                    }
+                    &:hover:after {
+                      visibility: visible;
+                      opacity: 1;
+                      color: $white;
+                    }
+                  }
+                  .edit-control {
+                    color: $white;
+                    transition: color .2s;
+                    &::after {
+                      visibility: hidden;
+                      opacity: 0;
+                      content: 'edit';
+                      position: absolute;
+                      top: -30px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                      background-color: $black;
+                      padding: 8px 8px 3px 8px;
+                      border-radius: 4px;
+                      transition: opacity .4s;
+                    }
+                    &:hover {
+                      color: $black;
+                    }
+                    &:hover:after {
+                      visibility: visible;
+                      opacity: 1;
+                      color: $white;
+                    }
+                  }
+                  &:hover {
+                    color: $black;
+                  }
+                }
+              }
+            }
+            &:hover {
+              -webkit-box-shadow: 8px 8px 41px -18px rgba(0,0,0,0.7);
+              -moz-box-shadow: 8px 8px 41px -18px rgba(0,0,0,0.7);
+              box-shadow: 8px 8px 41px -18px rgba(0,0,0,0.7);
+            }
+          }
+          .tile-active {
+            background-color: $admin;
+          }
+          .sortable-chosen {
+            background-color: $black;
+          }   
+        }
+      }
+
+      //
+      // FORM
+      //
+      .form-wrapper {
+        width: 60%;
+        margin-left: 20%;
+        margin-top: 50px;
+        .title {
+          margin: 0 0 25px 0;
+          font-weight: 300;
+          span {
+            color: $admin;
+          }
+        }
+        label {
+          color: $gray;
+        }
+        input:focus {
+          outline: none;
+        }
+        .input-form {
+          width: 100%;
+          border-style: none;
+          margin: 0 0 25px 0;
+          padding: 0;
+          height: 30px;
+          border-bottom: 1px solid black;
+          @include font-size(1.3);
+          background-color: transparent;
+        }
+        .upload-form {
+          .uploader-wrapper {
+            background-color: rgba(100,100,100,.1);
+            padding: 15px;
+            border-radius: 3px;
+            margin-bottom: 25px;
+            .upload-input-wrapper {
+              position: relative;
+              cursor: pointer;
+              width: 150px;
+              height: 40px;
+              background-color: $admin;
+              text-align: center;
+              color: $white;
+              border-radius: 3px;
+              z-index: 200;
+              transition: background-color .3s;
+              span {
+                line-height: 2.5;
+              }
+              input[type="file"]{
+                position: absolute;
+                cursor: pointer;
+                z-index: 0;
+                display: block;
+                left: 0;
+                top: 0;
+                width: 150px;
+                min-height: 100%;
+                opacity: 0;
+              }
+              &:hover {
+                background-color: $adminLight;
+              }
+            }
+            .preview {
+              width: 150px;
+              margin-top: 15px;
+              display: block;
+            }
+            .outer-progress {
+              width: 100%;
+              height: 40px;
+              background: rgba(0,0,0,.1);
+              line-height: 2.5;
+            }
+          }
+        }
+        .submit-form {
+          border-style: none;
+          background-color: $admin;
+          padding: 10px;
+          margin: 0;
+          width: 90px;
+          @include font-size(1);
+          color: white;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

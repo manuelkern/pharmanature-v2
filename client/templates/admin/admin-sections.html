@@ -1,0 +1,21 @@
+<template name="adminSections">
+  {{#if Template.subscriptionsReady}}
+    <div class="wrapper">
+      <div class="form-wrapper">
+        <form id="section-form">
+          <h1 class="title">Create a new <span>section</span></h1>
+          <input type="text" placeholder="Title" name="title" class="input-form title-form">
+          <input type="submit" value="Submit" class="submit-form"/>
+        </form>
+      </div>
+      
+      <div class="tiles-list" id="sections">
+        <div class="tiles-wrapper">
+          {{#sortable items=sections animation="400" ghostClass="sortable-ghost" options=sortableOptions}}
+            {{> adminSectionTile}}
+          {{/sortable}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</template>

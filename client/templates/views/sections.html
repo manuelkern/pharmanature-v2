@@ -1,0 +1,22 @@
+<template name="sections">
+  {{> Template.dynamic template=template }}
+</template>
+
+
+<template name="About">
+
+  {{#if Template.subscriptionsReady}}
+
+    {{section.title}}
+
+    {{#each pages}}
+      {{title}}
+    {{/each}}
+
+  {{/if}}
+  
+</template>
+
+<template name="Contact">
+  This is Contact
+</template>

@@ -1,0 +1,13 @@
+<template name="adminEditSection">
+  <div class="wrapper">
+    <div class="form-wrapper">
+      <form id="section-edit-form">
+        <h2 class="title">Edit section <span>{{title}}</span></h2>
+        <label for="title">Title</label>
+        <input type="text" value="{{title}}" name="title" class="input-form title-form">
+        {{> adminUploader multiple=false callbacks=myCallbacks thumbnail=thumbnail }}
+        <input type="submit" value="Submit" class="submit-form"/>
+      </form>
+    </div>
+  </div>
+</template>

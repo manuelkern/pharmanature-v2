@@ -1,0 +1,16 @@
+<template name="adminNav">
+  <div class="admin-nav-wrapper">
+    <div class="nav-inner">
+      <div class="admin-nav">
+        <a class="admin-home" href="{{pathFor 'adminDashboard'}}">Admin Dashboard</a>
+        <ul>
+          <li><a href="{{pathFor 'home'}}">Application</a></li>
+          <li><a class="{{isActivePath regex='sections'}}" href="{{pathFor 'adminSections'}}">Sections</a></li>
+        </ul>
+        <div class="admin-logout">
+          {{> atNavButton}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template> 

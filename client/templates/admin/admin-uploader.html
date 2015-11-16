@@ -1,0 +1,26 @@
+<template name="adminUploader">
+  <form method="POST" enctype="multipart/form-data" class="upload-form">
+    <div class="uploader-wrapper">
+
+      <div class="upload-input-wrapper">
+        <span><i class="fa fa-upload"></i> File</span>
+        <input type="file" class="jqUploadclass upload-input" data-form-data='{{submitData}}'>
+      </div>
+
+      <img src="{{thumbnail}}" class="preview">
+
+      {{#with infoLabel}}
+
+      <div class="info-label">{{ infoLabel}}</div>
+      <button class="start">StartUpload</button>
+      <div class="outer-progress">
+        <div style="background: red; height: 30px; width: {{progress}}">
+          {{ progress }}
+        </div>
+      </div>
+
+      {{/with}}
+
+    </div>
+  </form>
+</template>
