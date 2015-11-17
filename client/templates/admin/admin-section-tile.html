@@ -2,25 +2,8 @@
 {{#if Template.subscriptionsReady}}
   <div class="admin-tile {{#if active}}tile-active{{/if}}" data-id="{{order}}">
     <div class="tile-content">
-      <a class="tile-title" href="{{pathFor '/admin/sections/edit/:id' id=_id}}">{{title}}</a>
-      <div class="tile-order-badge">{{order}}</div>
-      <ul>      
-        {{#each pages}}
-          <li>{{title}}</li>
-        {{/each}}
-      </ul>
-
-      <div class="tile-controls">
-        <div class="switch">
-          <input type="checkbox" checked="{{#if active}}checked{{/if}}" class="toggle-active" id="{{title}}">
-          <label for="{{title}}"><span></span></label>
-          <div>{{#if active}}Active{{else}}Section is not active{{/if}}</div>
-        </div>
-        <ul>
-          <!-- <li><a class="edit-control" href="{{pathFor 'adminEditSection'}}"><i class="fa fa-pencil"></i></a></li> -->
-          <li><a class="delete-control"><i class="fa fa-trash"></i></a></li>
-        </ul>
-      </div>
+     
+<br><br><br>
     </div>
   </div>
 {{/if}}

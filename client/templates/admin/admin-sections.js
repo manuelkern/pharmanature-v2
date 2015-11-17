@@ -3,8 +3,10 @@
 //
 Template.adminSections.onCreated(function(){
   $('.admin-nav-wrapper').removeClass('hidden');
-  Meteor.subscribe('sections');
-  Meteor.subscribe('pagesTitle');
+  var self = this;
+  self.autorun(function() {
+    self.subscribe('sections');  
+  });
 });
 //
 // Ui hooks
