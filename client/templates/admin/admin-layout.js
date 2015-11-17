@@ -1,3 +1,5 @@
+BlazeLayout.setRoot('body');
+
 // Template.adminLayout.onRendered(function(){
 //   this.find('.admin-content')._uihooks = {
 //     insertElement: function(node, next) {

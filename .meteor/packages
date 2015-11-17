@@ -16,28 +16,30 @@ standard-minifiers      # JS/CSS minifiers run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 ecmascript              # Enable ECMAScript2015+ syntax in app code
 
+pauldowman:dotenv
 cwaring:modernizr
-fourseven:scss
-iron:router
-useraccounts:unstyled
-fortawesome:fontawesome
-accounts-password
-useraccounts:iron-routing
+ongoworks:security
+kadira:flow-router
+kadira:blaze-layout
+arillo:flow-router-helpers
+zimme:active-route
 alanning:roles
 brylie:first-user-admin
-msavin:mongol
+reactive-var
+check
 dburles:collection-helpers
 matb33:collection-hooks
-ongoworks:security
-zimme:active-route
-reactive-var
-pauldowman:dotenv
+fourseven:scss
+fortawesome:fontawesome
+juliancwirko:s-alert
+juliancwirko:s-alert-scale
+accounts-password
+useraccounts:unstyled
+useraccounts:flow-routing
+msavin:mongol
 classcraft:imagemagick
 tomi:upload-server
 tomi:upload-jquery
 rubaxa:sortable
-check
 velocityjs:velocityjs
-juliancwirko:s-alert
-juliancwirko:s-alert-scale
 infinitedg:gsap

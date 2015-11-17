@@ -9,6 +9,10 @@ Meteor.publish('sections', function(){
   return Sections.find();
 });
 
+Meteor.publish('singleSection', function(sectionId){
+  return Sections.find({_id: sectionId});
+});
+
 Meteor.publish('sectionsForNav', function(){
   return Sections.find({active: true}, {fields:{title: 1, order: 1}}, {sort: {order: 1}});
 });

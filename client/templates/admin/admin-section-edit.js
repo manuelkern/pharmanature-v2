@@ -1,12 +1,22 @@
-Template.adminEditSection.created = function () {
-  var sectionId = Template.instance().data._id;
+Template.adminEditSection.onCreated(function(){
+  var self = this;
+  self.autorun(function() {
+    var sectionId = FlowRouter.getParam('sectionId');
+    self.subscribe('singleSection', sectionId);  
+  });
+  var sectionId = FlowRouter.getParam('sectionId');
   Uploader.finished = function(index, file) {
     var thumbnailPath = file.baseUrl + file.subDirectory + '/thumbnail/' + file.name;
     Sections.update({_id: sectionId}, {$set: {image: file, thumbnail: thumbnailPath}});
   };
-};
+});
 
 Template.adminEditSection.helpers({
+  section: function() {
+    var sectionId = FlowRouter.getParam('sectionId');
+    var section = Sections.findOne({_id: sectionId}) || {};
+    return section;
+  },
   myCallbacks: function() {
     return {
       formData: function() { 
@@ -32,7 +42,6 @@ Template.adminEditSection.events({
         sAlert.error(error.reason);
       } else {
         sAlert.success('Section updated');
-        Router.go('adminSections');
       }
     });
   }

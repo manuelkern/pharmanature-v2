@@ -2,6 +2,7 @@
 // Subscriptions
 //
 Template.adminSections.onCreated(function(){
+  $('.admin-nav-wrapper').removeClass('hidden');
   Meteor.subscribe('sections');
   Meteor.subscribe('pagesTitle');
 });
@@ -59,6 +60,47 @@ Template.adminSections.events({
       }
     });
   },
+  'click .tile-title': function(event){
+    event.preventDefault();
+    // Vars
+    var $tile = $(event.currentTarget).closest('.admin-tile');
+    var $tileContent = $(event.currentTarget).closest('.tile-content');
+    var tileWidth = $tile.width();
+    var tileLeft = $tile.position().left;
+    var tileTop = $tile.position().top;
+    var width = $(window).width();
+    var height = $(window).height();
+    var route = this._id;
+    // Set tile
+    $tile.addClass('open');
+    $tile.css({
+      'width': tileWidth,
+      'left': tileLeft,
+      'top': tileTop
+    });
+    // Animate nav and other tiles
+    $('.admin-nav-wrapper').addClass('hidden');
+    $('.tiles-list').velocity({
+      marginLeft: '100%',
+    }, {
+      duration: 100
+    });
+    // Animate tile
+    $tileContent.velocity({
+      'opacity': '0'
+    });
+    $tile.velocity({
+      top: '0',
+      left: '0',
+      width: width,
+      height: height
+    }, {
+      delay: 200,
+      complete: function(){
+        FlowRouter.go('/admin/sections/edit/' + route);
+      },
+    });
+  },
   // Activate section
   'click .toggle-active': function(event){
     var checked = event.target.checked;
@@ -68,18 +110,22 @@ Template.adminSections.events({
   'click .delete-control': function(event, template){
     var sectionTitle = this.title;
     var order = this.order;
-    if (confirm("Delete this section: " + sectionTitle + "?")) {
-      Meteor.call('deleteSection', this._id, function(error, result){
-        if(error){
-          sAlert.error(error.reason);
-        } else {
-          sAlert.info('section deleted');
-          Meteor.call('decreaseOrder', order);
-          Meteor.setTimeout(function(){
-            adminAnimations.badgeUpdated();
-          }, 300);
-        }
-      });
+    if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
+      if (confirm("Delete this section: " + sectionTitle + "?")){
+        Meteor.call('deleteSection', this._id, function(error, result){
+          if(error){
+            sAlert.error(error.reason);
+          } else {
+            sAlert.info('section deleted');
+            Meteor.call('decreaseOrder', order);
+            Meteor.setTimeout(function(){
+              adminAnimations.badgeUpdated();
+            }, 300);
+          }
+        });
+      }
+    } else {
+      sAlert.error('Access Denied');
     }
   },
 });
