@@ -16,10 +16,13 @@ Template.adminSections.onCreated(function(){
 Template.adminSections.onRendered(function(){
   var self = this;
   self.autorun(function(){
-    if(Template.instance().ready.get()){    
+    if(Template.instance().ready.get()){
+
       Tracker.afterFlush(function(){
-        var $wrapper = this.$('.tiles-wrapper');
-        $wrapper.velocity('fadeIn');
+        // Tiles appears
+        var $tiles = this.$('.tiles-wrapper').children();
+        adminAnimations.tilesInserted($tiles, 150);
+        // Ui Hooks for tiles
         self.find('.tiles-wrapper')._uihooks = {
           insertElement: function(node, next){
             adminAnimations.tileInserted($(node), $(next));
@@ -29,6 +32,7 @@ Template.adminSections.onRendered(function(){
           }
         };
       });
+
     }
   });
 });
@@ -80,38 +84,11 @@ Template.adminSections.events({
   },
   'click .tile-title': function(event){
     event.preventDefault();
-    // Vars
-    var $tile = $(event.currentTarget).closest('.admin-tile');
-    var $tileContent = $(event.currentTarget).closest('.tile-content');
-    var tileWidth = $tile.width();
-    var tileLeft = $tile.position().left;
-    var tileTop = $tile.position().top;
-    var width = $(window).width();
-    var height = $(window).height();
+    //////// VARS ////////
+    var tile = $(event.currentTarget).closest('.admin-tile');
+    var tileContent = $(event.currentTarget).closest('.tile-content');
     var route = this._id;
-    // Set tile
-    $tile.addClass('open');
-    $tile.css({
-      'width': tileWidth,
-      'left': tileLeft,
-      'top': tileTop
-    });
-    // Animate nav and other tiles
-    $('.admin-nav-wrapper').addClass('hidden');
-    $('.tiles-list').velocity({marginLeft: '100%'}, {duration: 100});
-    // Animate tile
-    $tileContent.velocity({'opacity': '0'});
-    $tile.velocity({
-      top: '0',
-      left: '0',
-      width: width,
-      height: height
-    }, {
-      delay: 200,
-      complete: function(){
-        FlowRouter.go('/admin/sections/edit/' + route);
-      },
-    });
+    adminAnimations.openTile(tile, tileContent, route);
   },
   // Activate section
   'click .toggle-active': function(event){

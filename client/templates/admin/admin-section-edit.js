@@ -1,4 +1,5 @@
 Template.adminEditSection.onCreated(function(){
+  // $('.admin-nav-wrapper').removeClass('hidden');
   var self = this;
   self.autorun(function() {
     var sectionId = FlowRouter.getParam('sectionId');
@@ -84,6 +85,23 @@ Template.adminEditSection.events({
       }
     });
   },
+  'submit #section-add-sub-section': function(event, template){
+    event.preventDefault();
+    var subSectionTitle = template.$('#section-add-sub-section .title-sub-section-form').val();
+    var subSectionSlug = createURLSlug(subSectionTitle);
+    var doc = {
+      title: subSectionTitle,
+      slug: subSectionSlug
+    };
+    Meteor.call('insertSection', doc, function(error, result) {
+      if(error){
+        sAlert.error(error.reason);
+      } else {
+        sAlert.success('section created');
+        event.target.title.value = '';
+      }
+    });
+  },
   'click .delete-image': function(event, template){
     if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
       var sectionId = FlowRouter.getParam('sectionId');
@@ -95,6 +113,6 @@ Template.adminEditSection.events({
     }
   },
   'click .close': function(event){
-    window.history.back();
+    // window.history.back();
   }
 });

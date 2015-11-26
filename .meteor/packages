@@ -43,7 +43,6 @@ classcraft:imagemagick
 tomi:upload-server
 tomi:upload-jquery
 rubaxa:sortable
-infinitedg:gsap
 froala:editor-reactive
 percolate:momentum
 philippspo:momentum-flow-router

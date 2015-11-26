@@ -5,6 +5,7 @@
   position: relative;
   font-family: 'Roboto', sans-serif;
   background-color: $adminBg;
+  transition: background-color .4s;
   //
   // Nav
   //
@@ -76,6 +77,15 @@
   //
   // Content
   //
+  #wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
   .admin-content {
     position: relative;
     width: 100%;
