@@ -21,12 +21,14 @@ cwaring:modernizr
 ongoworks:security
 kadira:flow-router
 kadira:blaze-layout
+meteorhacks:subs-manager
 arillo:flow-router-helpers
 zimme:active-route
 alanning:roles
 brylie:first-user-admin
 reactive-var
 check
+random
 dburles:collection-helpers
 matb33:collection-hooks
 fourseven:scss
@@ -44,4 +46,3 @@ rubaxa:sortable
 velocityjs:velocityjs
 infinitedg:gsap
 froala:editor-reactive
-random

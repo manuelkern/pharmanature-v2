@@ -60,6 +60,7 @@ logging@1.0.8
 matb33:collection-hooks@0.8.1
 meteor@1.1.10
 meteor-base@1.0.1
+meteorhacks:subs-manager@1.6.2
 meteortoys:toykit@2.1.2
 minifiers@1.1.7
 minimongo@1.0.10

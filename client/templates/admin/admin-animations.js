@@ -8,8 +8,9 @@ adminAnimations.tileInserted = function(node, next){
 };
 
 adminAnimations.tileRemoved = function(node){
+  var height = node.height() + 55;
   node.velocity({
-    marginTop: '-134px',
+    marginTop: -height,
     opacity: '0'
   }, {
     duration: 400,

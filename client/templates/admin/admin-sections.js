@@ -3,25 +3,40 @@
 //
 Template.adminSections.onCreated(function(){
   $('.admin-nav-wrapper').removeClass('hidden');
-  Meteor.subscribe('sections');
+  var self = this;
+  self.ready = new ReactiveVar();
+  self.autorun(function(){
+    var handle = SectionsSubs.subscribe('sections');
+    self.ready.set(handle.ready());
+  });
 });
 //
 // Ui hooks
 //
 Template.adminSections.onRendered(function(){
-  this.find('.tiles-wrapper')._uihooks = {
-    insertElement: function(node, next){
-      adminAnimations.tileInserted($(node), $(next));
-    },
-    removeElement: function(node){
-      adminAnimations.tileRemoved($(node));
+  var self = this;
+  self.autorun(function(){
+    if(Template.instance().ready.get()){    
+      Tracker.afterFlush(function(){
+        self.find('.tiles-wrapper')._uihooks = {
+          insertElement: function(node, next){
+            adminAnimations.tileInserted($(node), $(next));
+          },
+          removeElement: function(node){
+            adminAnimations.tileRemoved($(node));
+          }
+        };
+      });
     }
-  };
+  });
 });
 //
 // Helpers
 //
 Template.adminSections.helpers({
+  sectionsReady: function(){
+    return Template.instance().ready.get();
+  },
   sections: function () {
     return Sections.find({}, {sort: {order: 1}});
   },
