@@ -6,7 +6,7 @@ Uploads.permit(['insert', 'update', 'remove']).ifHasRole('admin').apply();
 // Sections
 //
 Meteor.publish('sections', function(){
-  // Meteor._sleepForMs(2000);
+  Meteor._sleepForMs(2000);
   return Sections.find();
 });
 

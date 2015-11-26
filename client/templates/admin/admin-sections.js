@@ -18,6 +18,8 @@ Template.adminSections.onRendered(function(){
   self.autorun(function(){
     if(Template.instance().ready.get()){    
       Tracker.afterFlush(function(){
+        var $wrapper = this.$('.tiles-wrapper');
+        $wrapper.velocity('fadeIn');
         self.find('.tiles-wrapper')._uihooks = {
           insertElement: function(node, next){
             adminAnimations.tileInserted($(node), $(next));

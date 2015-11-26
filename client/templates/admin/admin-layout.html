@@ -3,7 +3,15 @@
     {{>Template.dynamic template=nav}}
     <div class="admin-content">
       {{> sAlert}}
-      {{>Template.dynamic template=content}}
+      {{#momentum plugin='flow-router'}}
+        {{>Template.dynamic template=content}}
+      {{/momentum}}
     </div>
+  </div>
+</template>
+
+<template name="contentWrapper">
+  <div class="frt-fixed-content-wrapper">
+    {{> UI.contentBlock}}
   </div>
 </template>
