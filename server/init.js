@@ -9,6 +9,9 @@ Meteor.startup(function () {
     },
     getDirectory: function(fileInfo, formData){
       return formData.directoryName;
+    },
+    finished: function(fileInfo, formFields){
+       fileInfo.id = Random.id();
     }
   });
 });

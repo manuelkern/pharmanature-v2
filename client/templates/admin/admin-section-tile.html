@@ -1,7 +1,8 @@
 <template name="adminSectionTile">
-{{#if Template.subscriptionsReady}}
   <div class="admin-tile {{#if active}}tile-active{{/if}}" data-id="{{order}}">
+    
     <div class="tile-content">
+
       <a class="tile-title" href="{{pathFor '/admin/sections/edit/:id' id=_id}}">{{title}}</a>
       <div class="tile-order-badge">{{order}}</div>
       <ul>      
@@ -21,7 +22,8 @@
           <li><a class="delete-control"><i class="fa fa-trash"></i></a></li>
         </ul>
       </div>
+
     </div>
+
   </div>
-{{/if}}
 </template>

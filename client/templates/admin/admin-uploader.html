@@ -3,22 +3,24 @@
     <div class="uploader-wrapper">
 
       <div class="upload-input-wrapper">
-        <span><i class="fa fa-upload"></i> File</span>
+        <span><i class="fa fa-upload"></i>
+        {{#if image}} Update{{else}} File{{/if}}</span>
         <input type="file" class="jqUploadclass upload-input" data-form-data='{{submitData}}'>
       </div>
-
-      <img src="{{thumbnail}}" class="preview">
+      <!-- thumbnail -->
+      {{#if image}}
+        <img src="{{thumbnail}}" class="preview">
+        <a class="delete-image"><i class="fa fa-trash"></i></a>
+      {{/if}}
 
       {{#with infoLabel}}
-
-      <div class="info-label">{{ infoLabel}}</div>
-      <button class="start">StartUpload</button>
-      <div class="outer-progress">
-        <div style="background: red; height: 30px; width: {{progress}}">
-          {{ progress }}
+        <div class="info-label">{{ infoLabel}}</div>
+        <button class="start">StartUpload</button>
+        <div class="outer-progress">
+          <div style="background: red; height: 30px; width: {{progress}}">
+            {{ progress }}
+          </div>
         </div>
-      </div>
-
       {{/with}}
 
     </div>

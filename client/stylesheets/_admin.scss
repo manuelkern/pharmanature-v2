@@ -347,4 +347,27 @@
 }
 .edit {
   background-color: $admin;
+  .admin-content {
+    .close {
+      @include font-size(1.6);
+      position: fixed;
+      color: $white;
+      top: 20px;
+      right: 30px;
+      cursor: pointer;
+    }
+    h1 {
+      @include font-size(3);
+      font-weight: 300;
+      color: $white;
+      text-align: center;
+      margin-bottom: 0;
+    }
+    .form-wrapper {
+      margin-top: 10px;
+      .title {
+        text-align: center;
+      }
+    }
+  }
 }

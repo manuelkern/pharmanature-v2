@@ -3,10 +3,7 @@
 //
 Template.adminSections.onCreated(function(){
   $('.admin-nav-wrapper').removeClass('hidden');
-  var self = this;
-  self.autorun(function() {
-    self.subscribe('sections');  
-  });
+  Meteor.subscribe('sections');
 });
 //
 // Ui hooks
@@ -50,8 +47,10 @@ Template.adminSections.events({
   'submit #section-form': function(event, template){
     event.preventDefault();
     var sectionTitle = template.$('#section-form .title-form').val();
+    var sectionSlug = createURLSlug(sectionTitle);
     var doc = {
       title: sectionTitle,
+      slug: sectionSlug
     };
     Meteor.call('insertSection', doc, function(error, result) {
       if(error){
@@ -82,15 +81,9 @@ Template.adminSections.events({
     });
     // Animate nav and other tiles
     $('.admin-nav-wrapper').addClass('hidden');
-    $('.tiles-list').velocity({
-      marginLeft: '100%',
-    }, {
-      duration: 100
-    });
+    $('.tiles-list').velocity({marginLeft: '100%'}, {duration: 100});
     // Animate tile
-    $tileContent.velocity({
-      'opacity': '0'
-    });
+    $tileContent.velocity({'opacity': '0'});
     $tile.velocity({
       top: '0',
       left: '0',
@@ -112,6 +105,7 @@ Template.adminSections.events({
   'click .delete-control': function(event, template){
     var sectionTitle = this.title;
     var order = this.order;
+
     if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
       if (confirm("Delete this section: " + sectionTitle + "?")){
         Meteor.call('deleteSection', this._id, function(error, result){

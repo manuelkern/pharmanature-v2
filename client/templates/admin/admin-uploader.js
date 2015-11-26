@@ -1,8 +1,8 @@
-Template.adminUploader.created = function() {
+Template.adminUploader.onCreated(function(){
   Uploader.init(this);
-};
+});
 
-Template.adminUploader.rendered = function () {
+Template.adminUploader.onRendered(function(){
   Uploader.render.call(this);
   function readURL(input) {
     var reader = new FileReader();
@@ -14,10 +14,10 @@ Template.adminUploader.rendered = function () {
   $(".upload-input").change(function(){
     readURL(this);
   });
-};
+});
 
 Template.adminUploader.events({
-  'click .start': function (event) {
+  'click .start': function (event){
     Uploader.startUpload.call(Template.instance(), event);
   }
 });

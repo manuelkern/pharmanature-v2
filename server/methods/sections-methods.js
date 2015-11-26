@@ -12,6 +12,15 @@ Meteor.methods({
   deleteSection: function(sectionId){
     var section = Sections.findOne(sectionId);
     Sections.remove(sectionId);
+    // Remove image if it exists
+    if (section.image){
+      var imagePath = section.image.path;
+      var imageThumbnailPath = section.image.subDirectory + '/thumbnail/' + section.image.name;
+      check(imagePath, String);
+      check(imageThumbnailPath, String);
+      UploadServer.delete(imagePath);
+      UploadServer.delete(imageThumbnailPath);
+    }
   },
   setActiveSection: function(sectionId, value){
     var section = Sections.findOne(sectionId);
@@ -19,7 +28,11 @@ Meteor.methods({
       Sections.update(sectionId, {$set: {active: value}});
     }
   },
-  addImageToSection: function(sectionId, file){
-    Sections.update(sectionId, {$set: {image: file}});
-  }
+  deleteSectionImage: function(sectionId, imagePath, imageThumbnailPath){
+    check(imagePath, String);
+    check(imageThumbnailPath, String);
+    Sections.update(sectionId, {$unset: {image: ''}});
+    UploadServer.delete(imagePath);
+    UploadServer.delete(imageThumbnailPath);
+  },
 });
