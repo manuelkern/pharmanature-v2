@@ -44,7 +44,7 @@ Template.adminSections.helpers({
     return Template.instance().ready.get();
   },
   sections: function () {
-    return Sections.find({}, {sort: {order: 1}});
+    return Sections.find({parent: null}, {sort: {order: 1}});
   },
   pages: function(){
     return Pages.find();
@@ -71,7 +71,9 @@ Template.adminSections.events({
     var sectionSlug = createURLSlug(sectionTitle);
     var doc = {
       title: sectionTitle,
-      slug: sectionSlug
+      slug: sectionSlug,
+      parent: null,
+      path: []
     };
     Meteor.call('insertSection', doc, function(error, result) {
       if(error){

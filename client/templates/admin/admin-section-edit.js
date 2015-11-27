@@ -89,11 +89,15 @@ Template.adminEditSection.events({
     event.preventDefault();
     var subSectionTitle = template.$('#section-add-sub-section .title-sub-section-form').val();
     var subSectionSlug = createURLSlug(subSectionTitle);
-    var doc = {
+    var subSectionParent = this._id;
+    var subSectionPath = this.path;
+    var subSectionDoc = {
       title: subSectionTitle,
-      slug: subSectionSlug
+      slug: subSectionSlug,
+      parent: subSectionParent,
+      path: subSectionPath
     };
-    Meteor.call('insertSection', doc, function(error, result) {
+    Meteor.call('insertSection', subSectionDoc, function(error, result) {
       if(error){
         sAlert.error(error.reason);
       } else {

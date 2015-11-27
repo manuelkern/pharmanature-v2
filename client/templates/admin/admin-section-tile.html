@@ -6,11 +6,9 @@
       <a class="tile-title" href="{{pathFor '/admin/sections/edit/:id' id=_id}}">{{title}}</a>
       <div class="tile-order-badge">{{order}}</div>
       
-      <ul>      
-        {{#each pages}}
-          <li>{{title}}</li>
-        {{/each}}
-      </ul>
+      <div class="sub-section-list-wrapper">
+        {{> subSectionsList}}
+      </div>
 
       <div class="tile-controls">
         <div class="switch">
@@ -25,5 +23,18 @@
       </div>
     </div>
 
+  </div>
+</template>
+
+<template name="subSectionsList">
+  <div class="sub-sections-list">  
+    <ul>
+    {{#each subSections}}
+      <li><a href="{{pathFor '/admin/sections/edit/:id' id=_id}}">{{title}}</a></li>
+      {{#if haveChildren}}
+        {{> subSectionsList}}
+      {{/if}}
+    {{/each}}
+    </ul>
   </div>
 </template>
