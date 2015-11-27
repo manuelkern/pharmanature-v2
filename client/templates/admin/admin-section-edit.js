@@ -85,6 +85,7 @@ Template.adminEditSection.events({
       }
     });
   },
+  // Insert sub section
   'submit #section-add-sub-section': function(event, template){
     event.preventDefault();
     var subSectionTitle = template.$('#section-add-sub-section .title-sub-section-form').val();
@@ -106,6 +107,7 @@ Template.adminEditSection.events({
       }
     });
   },
+  // Delete image
   'click .delete-image': function(event, template){
     if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
       var sectionId = FlowRouter.getParam('sectionId');

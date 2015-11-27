@@ -30,7 +30,7 @@
   <div class="sub-sections-list">  
     <ul>
     {{#each subSections}}
-      <li><a href="{{pathFor '/admin/sections/edit/:id' id=_id}}">{{title}}</a></li>
+      <li><a href="{{pathFor '/admin/sections/edit/:id' id=_id}}">{{title}} {{order}}</a></li>
       {{#if haveChildren}}
         {{> subSectionsList}}
       {{/if}}

@@ -75,7 +75,7 @@ Template.adminSections.events({
       parent: null,
       path: []
     };
-    Meteor.call('insertSection', doc, function(error, result) {
+    Meteor.call('insertMotherSection', doc, function(error, result) {
       if(error){
         sAlert.error(error.reason);
       } else {
@@ -84,9 +84,9 @@ Template.adminSections.events({
       }
     });
   },
+  // Open section
   'click .tile-title': function(event){
     event.preventDefault();
-    //////// VARS ////////
     var tile = $(event.currentTarget).closest('.admin-tile');
     var tileContent = $(event.currentTarget).closest('.tile-content');
     var route = this._id;
