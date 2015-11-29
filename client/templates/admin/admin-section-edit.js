@@ -3,7 +3,7 @@ Template.adminEditSection.onCreated(function(){
   var self = this;
   self.autorun(function() {
     var sectionId = FlowRouter.getParam('sectionId');
-    self.subscribe('singleSection', sectionId);  
+    self.subscribe('singleSection', sectionId);
   });
   var sectionId = FlowRouter.getParam('sectionId');
   Uploader.finished = function(index, file) {
@@ -13,21 +13,18 @@ Template.adminEditSection.onCreated(function(){
   };
 });
 
-// Template.adminEditSection.onRendered(function(template){
-//   this.autorun(function(){
-//     if(Template.instance().subscriptionsReady()){
-//       Tracker.afterFlush(function(){
-//         var $title = this.$('.section-title');
-//         var $form = this.$('.form-wrapper');
-//         var enter = new TimelineMax();
-//         console.log($form);
-//         enter
-//           .from($title, 0.4, {opacity:0, y:'50', clearProps: 'all'})
-//           .from($form, 0.4, {opacity: 0, y:'100', clearProps: 'all'}, '-=0.2');
-//       });
-//     }
-//   });
-// });
+Template.adminEditSection.onRendered(function(template){
+  this.autorun(function(){
+    if(Template.instance().subscriptionsReady()){
+      Tracker.afterFlush(function(){
+        var $title = this.$('.section-title');
+        var $form = this.$('.form-wrapper');
+        $title.velocity('fadeIn', {duration: 700});
+        $form.velocity('fadeIn');
+      });
+    }
+  });
+});
 
 Template.adminEditSection.helpers({
   section: function() {
@@ -107,6 +104,26 @@ Template.adminEditSection.events({
       }
     });
   },
+  // Insert page
+  'submit #add-page': function(event, template){
+    event.preventDefault();
+    var pageTitle = template.$('#add-page .title-add-page-form').val();
+    var pageSlug = createURLSlug(pageTitle);
+    var sectionId = this._id;
+    var pageDoc = {
+      title: pageTitle,
+      slug: pageSlug,
+      section_id: sectionId
+    };
+    Meteor.call('insertPage', pageDoc, function(error, result){
+      if(error){
+        sAlert.error(error.reason);
+      } else {
+        sAlert.success('page created');
+        event.target.title.value = '';
+      }
+    });
+  },
   // Delete image
   'click .delete-image': function(event, template){
     if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
@@ -120,5 +137,26 @@ Template.adminEditSection.events({
   },
   'click .close': function(event){
     // window.history.back();
+  },
+  'click .delete-section': function(event, template){
+    var sectionTitle = this.title;
+    var order = this.order;
+    if (Roles.userIsInRole(Meteor.user(), ['admin'])) {
+      if (confirm("Delete this section: " + sectionTitle + "?")){
+        Meteor.call('deleteSection', this._id, function(error, result){
+          if(error){
+            sAlert.error(error.reason);
+          } else {
+            sAlert.info('section deleted');
+            Meteor.call('decreaseOrder', order);
+            Meteor.setTimeout(function(){
+              adminAnimations.badgeUpdated();
+            }, 300);
+          }
+        });
+      }
+    } else {
+      sAlert.error('Access Denied');
+    }
   }
 });

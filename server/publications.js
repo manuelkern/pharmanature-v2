@@ -7,14 +7,11 @@ Uploads.permit(['insert', 'update', 'remove']).ifHasRole('admin').apply();
 //
 Meteor.publish('sections', function(){
   // Meteor._sleepForMs(2000);
-  return Sections.find({},{
-    fields: {
-      image: 0
-    }
-  });
+  return [
+    Sections.find({},{fields: {image: 0}}),
+    Pages.find({})
+  ];
 });
-
-
 
 Meteor.publish('singleSection', function(sectionId){
   return Sections.find({_id: sectionId});

@@ -1,4 +1,7 @@
 Meteor.methods({
+  insertPage: function(doc){
+    Pages.insert(doc);
+  },
   deletePage: function(pageId){
     var page = Pages.findOne(pageId);
     Pages.remove(pageId);

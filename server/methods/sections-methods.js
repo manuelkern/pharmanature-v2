@@ -1,12 +1,7 @@
+// Helpers //
 Sections.before.remove(function(doc){
   var sectionsId = this.transform()._id;
   var sections = Sections.find({'_id': {$in: [sectionsId]}}, {fields: {image: 1}});
-
-  // var deleteImage = function(imagePath, imageThumbnailPath){
-  //   UploadServer.delete(imagePath);
-  //   UploadServer.delete(imageThumbnailPath);
-  // };
-
   sections.map(function(section){
     if (section.image){
       var imagePath = section.image.path;
@@ -18,7 +13,7 @@ Sections.before.remove(function(doc){
     }
   });
 });
-
+// Methods //
 Meteor.methods({
   insertMotherSection: function(doc){
     var order = Sections.find({parent: null}).count();
@@ -59,21 +54,3 @@ Meteor.methods({
     UploadServer.delete(imageThumbnailPath);
   },
 });
-
-  // deleteSection: function(sectionId){
-  //   var section = Sections.findOne(sectionId);
-  //   Sections.remove({
-  //     path: {
-  //       $all: [sectionId]
-  //     }
-  //   });
-  //   // Remove image if it exists
-  //   if (section.image){
-  //     var imagePath = section.image.path;
-  //     var imageThumbnailPath = section.image.subDirectory + '/thumbnail/' + section.image.name;
-  //     check(imagePath, String);
-  //     check(imageThumbnailPath, String);
-  //     UploadServer.delete(imagePath);
-  //     UploadServer.delete(imageThumbnailPath);
-  //   }
-  // },

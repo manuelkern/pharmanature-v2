@@ -46,9 +46,6 @@ Template.adminSections.helpers({
   sections: function () {
     return Sections.find({parent: null}, {sort: {order: 1}});
   },
-  pages: function(){
-    return Pages.find();
-  },
   // Sortable tiles
   sortableOptions: {
     group: {
